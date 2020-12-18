@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Canvas</title>
+
+    <!--esto son de la pagina getmdl.io-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <!--mi script para el canvas-->
+    <script>
+        window.addEventListener('load', () => {//una vez que se cargue todo recien podre usar los eventos, es una precaucion.
+            //capturando canvas boton del crear lineas
+            var canvas = document.querySelector('#canvas');
+            //capturar o definir el contexto 2d o 3D
+            var contexto = canvas.getContext('2d');
+
+            var btnCrearLineas = document.querySelector('#crearLineas');
+            btnCrearLineas.addEventListener('click', () => {
+                contexto.clearRect(0,0,200,200);//limpia todo 
+                contexto.beginPath();//iniciar una grafica
+                contexto.moveTo(10, 10);// // inicia el punto en el cuadro
+                contexto.lineTo(180, 20);
+                contexto.lineTo(180, 180);//del 20 se va al 180 180 seguido
+                contexto.width = 1;//1px
+                contexto.strokeStyle = 'blue'; //elige el color 
+                contexto.stroke();//lo dibuja
+                contexto.closePath();
+            })
+
+            //aqui es el boton del arco
+            var canvas = document.querySelector('#canvas');
+            //capturar o definir el contexto 2d o 3D
+            var contexto = canvas.getContext('2d');
+
+            var btnCrearArcos = document.querySelector('#crearArcos');
+            btnCrearArcos.addEventListener('click', () => {
+                contexto.beginPath();//iniciar una grafica
+                //ANgulos Math.PI * 2 = 360
+                //arc(x, y, radio, inicio angulo, final anglo, r (true manesillas reloj false en contra))
+                // radianes (Math.PI / 180) * ANGULO
+                //contexto.arc(100, 100, 80, 0, Math.PI * 2, true);
+                //contexto.width = 5;//1px
+                //contexto.strokeStyle = 'red';
+                contexto.arc(100, 100, 80, 0, Math.PI * 2, true);
+                contexto.moveTo(90,60);
+                contexto.arc(70,60,20,0,Math.PI * 2, true);
+                contexto.moveTo(150,60);
+                contexto.arc(130,60,20,0,Math.PI * 2, true);
+
+                contexto.moveTo(135,100);
+                //sad face -- contexto.arc(100, 130,40, (Math.PI / 180) * 180,false);
+                contexto.arc(100,100,35,0, Math.PI, false);
+
+                contexto.stroke();
+                contexto.closePath();
+            })
+            //curvas cuadraticas boton
+            var btnCrearCurvasCuadraticas= document.querySelector('#crearCurvasCuadraticas');
+            btnCrearCurvasCuadraticas.addEventListener('click', () => {
+                contexto.clearRect(0,0,200,200);//limpia todo 
+                contexto.beginPath();//iniciar una grafica
+                contexto.moveTo(100,100);
+                contexto.quadraticCurveTo(150,10, 200, 200);//(x,y,xfinal,yfinal)
+                contexto.stroke();//lo dibuja
+                contexto.closePath();
+            })
+
+            //curvas de bezier boton
+            var btnCrearCurvasBezier= document.querySelector('#crearCurvasBezier');
+            btnCrearCurvasBezier.addEventListener('click', () => {
+                contexto.clearRect(0,0,200,200);//limpia todo 
+                contexto.beginPath();//iniciar una grafica
+                /*contexto.moveTo(10,180);
+                contexto.bezierCurveTo(40,10,160,190,180,20);//(x,y,x,y,xf,yf)*/
+                contexto.moveTo(100,100);
+                contexto.bezierCurveTo(150,200,250,0,300,120);
+                contexto.moveTo(100,200);
+                contexto.bezierCurveTo(150,300,250,100,300,220);
+                contexto.moveTo(100,200);
+                contexto.lineTo(100,100);
+                contexto.moveTo(300,220);
+                contexto.lineTo(300,120);
+                
+                contexto.stroke();//lo dibuja
+                contexto.closePath();
+            })
+
+        });
+    </script>
+
+    <!--esto es para el color-->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.purple-deep_purple.min.css" />
+
+    <!--Estilos css para la pagina-->
+    <style>
+        .page-content{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        canvas{
+            border: 1px solid red;
+        }
+        #colorboton{
+            background-color: rgba(119, 2, 2, 0.63);
+        }
+        .buttons{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .buttons button{
+            margin: 10px;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+          <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Canvas</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+              <a class="mdl-navigation__link" href="uno.html">Modulo 1</a>
+              <a class="mdl-navigation__link" href="dos.html">Modulo 2</a>
+              <a class="mdl-navigation__link" href="tres.html">Modulo 3</a>
+              <a class="mdl-navigation__link" href="cuatro.html">Modulo 4</a>
+            </nav>
+          </div>
+        </header>
+        <div class="mdl-layout__drawer">
+          <span class="mdl-layout-title">Canvas2</span>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="uno.html">Modulo 1</a>
+            <a class="mdl-navigation__link" href="dos.html">Modulo 2</a>
+            <a class="mdl-navigation__link" href="tres.html">Modulo 3</a>
+            <a class="mdl-navigation__link" href="cuatro.html">Modulo 4</a>
+          </nav>
+        </div>
+        <main class="mdl-layout__content">
+          <div class="page-content">
+              <!-- Your content goes here Los 4 de canvas son los legales-->
+              <!--aqui van los botones-->
+              <!-- boton crear lineas-->
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="crearLineas">
+                    Crear Linea
+                  </button>
+              </div>
+
+              <!-- boton crear arcos-->
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="crearArcos">
+                    Crear Arco
+                  </button>
+              </div>
+
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="crearCurvasCuadraticas">
+                  crearCurvasCuadraticas
+                  </button>
+              </div>
+
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="crearCurvasBezier">
+                  Curvas Bezier
+                  </button>
+              </div>
+              
+            <canvas id="canvas" width="400" height="400">  
+                
+            </canvas>
+            
+            </div>
+        </main>
+      </div>
+</body>
+</html>
